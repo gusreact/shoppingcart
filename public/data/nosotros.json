@@ -1,0 +1,30 @@
+[
+{
+"id": 1,
+"nombre": "Juan Perez",
+"email": "juanperez@gmail.com",
+"puesto":"Gerente de Ventas",
+"foto": "/images/avatar1m.jpg"
+},
+{
+"id": 2,
+"nombre": "Sofia Gomez",
+"email": "sofiagomez@gmail.com",
+"puesto":"Vendedora",
+"foto": "/images/avatar1f.jpg"
+},
+{
+"id": 3,
+"nombre": "Arturo Ramirez",
+"email": "arturo ramirez@gmail.com",
+"puesto":"Asistente Administrativo",
+"foto": "/images/avatar2m.jpg"
+},
+{
+"id": 4,
+"nombre": "Maria Lopez",
+"email": "marialopez@gmail.com",
+"puesto":"Contadora",
+"foto": "/images/avatar2f.jpg"
+}
+]

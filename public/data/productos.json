@@ -1,0 +1,38 @@
+[
+{
+"id": 1,
+"nombre": "Juan Perez",
+"precio": 10,
+"descripcion":"Gerente de Ventas",
+"imagen": "/images/avatar1m.jpg",
+"stock": 5,
+"quantity": 0
+},
+{
+"id": 2,
+"nombre": "Sofia Gomez",
+"precio": 12,
+"descripcion":"Vendedora",
+"imagen": "/images/avatar1f.jpg",
+"stock": 3,
+"quantity": 0
+},
+{
+"id": 3,
+"nombre": "Arturo Ramirez",
+"precio": 8,
+"descripcion":"Asistente Administrativo",
+"imagen": "/images/avatar2m.jpg",
+"stock": 10,
+"quantity": 0
+},
+{
+"id": 4,
+"nombre": "Maria Lopez",
+"precio": 15,
+"descripcion":"Contadora",
+"imagen": "/images/avatar2f.jpg",
+"stock": 2,
+"quantity": 0
+}
+]

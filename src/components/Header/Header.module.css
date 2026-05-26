@@ -1,0 +1,102 @@
+
+.header {
+    background-color: #1a1a1a;
+    padding: 15px 20px;
+    color: #ffffff;
+}
+
+.headerContent {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.nav ul {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: 30px;
+}
+
+.nav li {
+    margin: 0;
+    padding: 0;
+}
+
+.nav a {
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+    padding: 8px 12px;
+    border-radius: 4px;
+}
+
+.nav a:hover {
+    color: #8DE2D6;
+    background-color: rgba(141, 226, 214, 0.1);
+}
+
+
+.cartContainer {
+    display: flex;
+    align-items: center;
+    margin-left: 24px;
+    position: relative;
+}
+
+.cartBadge {
+    background: #ff4d4f;
+    color: #fff;
+    border-radius: 50%;
+    min-width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.85rem;
+    font-weight: bold;
+    position: absolute;
+    top: 28px;
+    right: -4px;
+    padding: 0 6px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.15);
+    z-index: 1;
+}
+
+.cartIcon {
+    color: #8DE2D6;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+.cartIcon:hover {
+    color: #ffffff;
+}
+
+.header nav ul {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: 30px;
+}
+
+.header nav li {
+    margin: 0;
+    padding: 0;
+}
+
+.header nav a {
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+    padding: 8px 12px;
+    border-radius: 4px;
+}
+
+.header nav a:hover {
+    color: #8DE2D6;
+    background-color: rgba(141, 226, 214, 0.1);
+}
