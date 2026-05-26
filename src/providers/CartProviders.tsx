@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import type { Producto } from './types/Producto';
-import { CartContext } from './context/CartContext';
+import type { Producto } from '../types/Producto';
+import { CartContext } from '../context/CartContext';
 import { useLocation } from 'react-router-dom';
 
 type CartProviderProps = {

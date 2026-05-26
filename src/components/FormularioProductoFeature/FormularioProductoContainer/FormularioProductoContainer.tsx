@@ -33,7 +33,7 @@ export function FormularioContainer() {
             return;
         }
 
-        const apiKey = 'f8cdeaee2fc7b10c4ba1b120d54fde02';
+        const apiKey = import.meta.env.VITE_IMGBB_API_KEY;
         const formData = new FormData();
         formData.append('image', imagenFile);
         try {

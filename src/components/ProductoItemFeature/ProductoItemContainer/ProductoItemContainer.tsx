@@ -20,12 +20,10 @@ export function ProductoItemContainer({ Mensaje } : { Mensaje: string }) {
             const datosConCarrito = datos.map((producto: { id: number }) => {
                 const productoEnCarrito = cart.find((item) => item.id === producto.id);
                 if (productoEnCarrito) {
-                    console.log(`Producto encontrado en el carrito con cantidad ${productoEnCarrito.quantity}`);
                     return {...producto, quantity: productoEnCarrito.quantity };
                 }
                 return producto;
             });
-            console.log("Productos cargados:", datosConCarrito);
             setProductos(datosConCarrito);
         })
         .catch((error) => {

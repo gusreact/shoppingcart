@@ -46,8 +46,9 @@ export function ProductoItem({ producto } : { producto: Producto }) {
                 <button onClick={handleRemoveFromCart}>
                     Quitar producto del carrito
                 </button>
-            ) : (
-                <button onClick={handleAddToCart}>
+            ) :
+            (
+                <button onClick={handleAddToCart} disabled={cantidad === 0}>
                     {productoEnCarrito ? `Actualizar ${cantidad} en el Carrito` : `Agregar ${cantidad} al Carrito`}
                 </button>
             )}
