@@ -10,34 +10,37 @@ type CartProviderProps = {
 export const CartProvider = ({ children }: CartProviderProps) => {
     const location = useLocation();
     const [cart, setCart] = useState<Producto[]>([]);
-    const addToCart = (product: Producto, quantity: number) => {
+    const addToCart = (product: Producto, cantidad: number) => {
         const itemInCart = cart.find(item => item.id === product.id);
         if (itemInCart) {
             const updatedCart: Producto[] = cart.map((item: Producto) =>
                 item.id === product.id
-                ? { ...item, quantity: location.pathname === '/carrito' || location.pathname === `/producto/${product.id}` || location.pathname === '/productos' ? quantity : item.quantity + quantity }
+                ? { ...item, cantidad: location.pathname === '/carrito' || location.pathname === `/producto/${product.id}` || location.pathname === '/productos' ? cantidad : item.cantidad + cantidad }
                 : item
             );
             setCart(updatedCart);
         } else {
-            setCart(prevCart => [...prevCart, { ...product, quantity }]);
+            setCart(prevCart => [...prevCart, { ...product, cantidad }]);
         }
     };
     const clearCart = () => {
         setCart([]);
     };
     const getCartQuantity = () => {
-        return cart.reduce((acc, item) => acc + item.quantity, 0);
+        return cart.reduce((acc, item) => acc + item.cantidad, 0);
     };
     const getCartTotal = () => {
-        return cart.reduce((acc, item) => acc + item.precio * item.quantity, 0);
+        return cart.reduce((acc, item) => acc + item.precio * item.cantidad, 0);
     };
-    const removeProductoDelCarrito = (productId: number) => {
+    const removeProductoDelCarrito = (productId: string) => {
         setCart(cart.filter(item => item.id !== productId));
     };
+    const isInCart = (productId: string) => {
+        return cart.some(item => item.id === productId);
+   };
     return (
         <CartContext.Provider value={{ cart, addToCart, clearCart,
-        getCartQuantity, getCartTotal, removeProductoDelCarrito }}>
+        getCartQuantity, getCartTotal, removeProductoDelCarrito, isInCart }}>
         {children}
         </CartContext.Provider>
     );

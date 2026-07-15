@@ -1,18 +1,30 @@
 import { Link } from 'react-router-dom';
 import styles from './Header.module.css';
 import { useCart } from '../../hooks/useCart';
+import { useAuth } from '../../hooks/useAuth';
 
 function Header() {
     const { getCartQuantity } = useCart();
     const cartQuantity = getCartQuantity();
+    const { user, logout } = useAuth();
     return (
         <header className={styles.header}>
             <div className={styles.headerContent}>
                 <nav className={styles.nav}>
                     <ul>
                         <li><Link to="/">Inicio</Link></li>
-                        <li><Link to="/productos">Productos</Link></li>
-                        <li><Link to="/alta">Alta de producto</Link></li>
+                        <li><Link to="/productos-nacionales">Productos Nacionales</Link></li>
+                        <li><Link to="/admin/cupones">Gestión de Cupones</Link></li>
+                        {user ? (
+                            <>{/* Mostrar Gestion SOLO si el usuario es admin */}
+                                {user.rol === 'admin' && (<li><Link to="/productos">Gestion</Link></li>)}
+                                <li><Link to="/perfil">Perfil</Link></li>
+                                    <span>¡Hola, {user.email}!</span>
+                                    <button onClick={logout}>Cerrar Sesión</button>
+                            </>
+                                ) : (
+                                    <li><Link to="/login">Login</Link></li>
+                                )}
                     </ul>
                 </nav>
                 <Link to="/carrito">

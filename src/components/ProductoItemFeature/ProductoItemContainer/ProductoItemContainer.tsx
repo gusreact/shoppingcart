@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { ProductoItemList } from '../ProductoItemList/ProductoItemList';
 import { useCart } from '../../../hooks/useCart';
+import { SpinnerComponent } from '../../SpinnerComponent/SpinnerComponent';
 
 export function ProductoItemContainer({ Mensaje } : { Mensaje: string }) {
     const [productos, setProductos] = useState([]);
@@ -17,10 +18,10 @@ export function ProductoItemContainer({ Mensaje } : { Mensaje: string }) {
             return respuesta.json();
         })
         .then((datos) => {
-            const datosConCarrito = datos.map((producto: { id: number }) => {
+            const datosConCarrito = datos.map((producto: { id: string }) => {
                 const productoEnCarrito = cart.find((item) => item.id === producto.id);
                 if (productoEnCarrito) {
-                    return {...producto, quantity: productoEnCarrito.quantity };
+                    return {...producto, cantidad: productoEnCarrito.cantidad };
                 }
                 return producto;
             });
@@ -35,7 +36,7 @@ export function ProductoItemContainer({ Mensaje } : { Mensaje: string }) {
     }, [cart]);
     
     if (cargando) {
-        return <p>Cargando productos, por favor espere...</p>;
+        return <SpinnerComponent message="Cargando productos, por favor espere..." />;
     }
     if (error) {
         return <p>Error: {error}</p>;

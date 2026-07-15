@@ -7,7 +7,8 @@ type CartContextValue = {
     clearCart: () => void;
     getCartQuantity: () => number;
     getCartTotal: () => number;
-    removeProductoDelCarrito: (productId: number) => void;
+    removeProductoDelCarrito: (productId: string) => void;
+    isInCart: (productId: string) => boolean;
 };
 
 export const CartContext = createContext<CartContextValue | undefined>(undefined);

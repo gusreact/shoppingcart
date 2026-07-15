@@ -1,6 +1,7 @@
 import React from 'react';
+import type { Producto } from '../../../types/Producto';
 
-export function FormularioProducto({datosForm, manejarCambio, manejarCambioImagen, manejarEnvio, loading} : {datosForm: { nombre: string; precio: number; stock: number; urlImagen: string }; manejarCambio: (e: React.ChangeEvent<HTMLInputElement>) => void; manejarCambioImagen: (e: React.ChangeEvent<HTMLInputElement>) => void; manejarEnvio: (e: React.SubmitEvent<HTMLFormElement>) => void; loading: boolean}) {
+export function FormularioProducto({datosForm, manejarCambio, manejarCambioImagen, manejarEnvio, modoEdicion, cancelarEdicion, productoAEditar, loading} : {datosForm: { id: string; categoria: string; nombre: string; descripcion: string; precio: number; cantidad: number; stock: number; imagen: string }; manejarCambio: (e: React.ChangeEvent<HTMLInputElement>) => void; manejarCambioImagen: (e: React.ChangeEvent<HTMLInputElement>) => void; manejarEnvio: (e: React.SubmitEvent<HTMLFormElement>) => void; modoEdicion: boolean; cancelarEdicion: () => void; productoAEditar: Producto | null; loading: boolean}) {
     const formStyle: React.CSSProperties = {
         display: 'flex',
         flexDirection: 'column',
@@ -14,7 +15,17 @@ export function FormularioProducto({datosForm, manejarCambio, manejarCambioImage
 
     return (
         <form style={formStyle} onSubmit={manejarEnvio}>
-            <h3>Agregar Nuevo Producto</h3>
+            <h3>{modoEdicion ? 'Editar producto' : 'Agregar nuevo producto'}</h3>
+            <div>
+                <label>Categoría:</label>
+                <input
+                    type="text"
+                    name="categoria"
+                    placeholder="Ej: Tecnología"
+                    value={datosForm.categoria}
+                    onChange={manejarCambio}
+                />
+            </div>
             <div>
                 <label>Nombre del Producto:</label>
                 <input
@@ -26,12 +37,32 @@ export function FormularioProducto({datosForm, manejarCambio, manejarCambioImage
                 />
             </div>
             <div>
+                <label>Descripción:</label>
+                <input
+                    type="text"
+                    name="descripcion"
+                    placeholder="Ej: Teclado Mecánico"
+                    value={datosForm.descripcion}
+                    onChange={manejarCambio}
+                />
+            </div>
+            <div>
                 <label>Precio:</label>
                 <input
                     type="number"
                     name="precio"
                     placeholder="Ej: 95"
                     value={datosForm.precio}
+                    onChange={manejarCambio}
+                />
+            </div>
+            <div>
+                <label>Cantidad:</label>
+                <input
+                    type="number"
+                    name="cantidad"
+                    placeholder="Ej: 95"
+                    value={datosForm.cantidad}
                     onChange={manejarCambio}
                 />
             </div>
@@ -49,15 +80,25 @@ export function FormularioProducto({datosForm, manejarCambio, manejarCambioImage
                 <label>Imagen:</label>
                 <input
                     type="file"
-                    name="urlImagen"
-                    placeholder="https://…"
-                    value={datosForm.urlImagen}
+                    name="imagen"
+                    accept="image/*"
                     onChange={manejarCambioImagen}
                 />
+                {modoEdicion && datosForm.imagen && (
+                    <div>
+                        <p>Imagen actual:</p>
+                        <img src={datosForm.imagen} alt="Vista previa" style={{ width: '100px' }} />
+                    </div>
+                )}
             </div>
             <button type="submit" disabled={loading}>
-                {loading ? 'Guardando...' : 'Guardar Producto'}
+                {loading ? 'Actualizando...' : modoEdicion ? 'Actualizar producto' : 'Agregar Producto'}
             </button>
+            {productoAEditar && (
+                <button onClick={cancelarEdicion}>
+                    Cancelar Edición
+                </button>
+            )}
         </form>
     );
 }

@@ -14,12 +14,12 @@ const ProductoItemDetalle = () => {
         fetch('/data/productos.json')
             .then(response => response.json())
             .then(data => {
-                const productoEncontradoEnCarrito = cart.find(item => item.id === parseInt(id || '0'));
+                const productoEncontradoEnCarrito = cart.find(item => item.id === id || '0');
                 if (productoEncontradoEnCarrito) {
                     setProducto(productoEncontradoEnCarrito);
                     return;
                 }
-                const productoEncontrado = data.find((p: Producto) => p.id === parseInt(id));
+                const productoEncontrado = data.find((p: Producto) => p.id === id);
                 setProducto(productoEncontrado);
             })
             .catch(error => console.error("Error al cargar el producto:", error));

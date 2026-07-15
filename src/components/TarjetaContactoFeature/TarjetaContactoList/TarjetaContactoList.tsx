@@ -1,13 +1,14 @@
+import type { Empleado } from "../../../types/Empleado";
 import { TarjetaContacto } from "../TarjetaContacto/TarjetaContacto";
-export function TarjetaContactoList({ contactos } : { contactos : { id: string; nombre: string; email: string; puesto: string; foto: string }[] }) {
+export function TarjetaContactoList({ empleados } : { empleados : Empleado[] }) {
     return (
         <div style={{ display: 'flex', gap: '20px' }}>
-            {contactos.map(contacto => (
-                <TarjetaContacto key={contacto.id}
-                    nombre={contacto.nombre}
-                    email={contacto.email}
-                    puesto={contacto.puesto}
-                    foto={contacto.foto}
+            {empleados.map(empleados => (
+                <TarjetaContacto key={empleados.id}
+                    nombre={empleados.nombre}
+                    email={empleados.email}
+                    rol={empleados.rol}
+                    fotoURL={empleados.fotoURL}
                 />
             ))}
         </div>

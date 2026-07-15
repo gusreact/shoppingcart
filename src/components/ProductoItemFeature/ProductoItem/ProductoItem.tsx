@@ -4,10 +4,10 @@ import { useCart } from '../../../hooks/useCart';
 import type { Producto } from "../../../types/Producto";
 
 export function ProductoItem({ producto } : { producto: Producto }) {
-    const [cantidad, setCantidad] = useState(producto.quantity || 0);
+    const [cantidad, setCantidad] = useState(producto.cantidad || 0);
     const [favorito, setFavorito] = useState(false);
     const { addToCart, removeProductoDelCarrito } = useCart();
-    const [productoEnCarrito, setProductoEnCarrito] = useState<boolean | null>(producto.quantity > 0 ? true : false);
+    const [productoEnCarrito, setProductoEnCarrito] = useState<boolean | null>(producto.cantidad > 0 ? true : false);
 
     const incrementar = () => {
         if (cantidad < producto.stock)
