@@ -5,100 +5,115 @@ export function FormularioProducto({datosForm, manejarCambio, manejarCambioImage
     const formStyle: React.CSSProperties = {
         display: 'flex',
         flexDirection: 'column',
-        maxWidth: '24rem',
-        margin: '3rem auto',
-        padding: '1.5rem',
-        border: '1px solid #ddd',
-        borderRadius: '8px',
-        gap: '16px'
+        gap: '1rem',
+        width: '100%',
+        maxWidth: '28rem',
+        margin: '0 auto',
     };
 
     return (
-        <form style={formStyle} onSubmit={manejarEnvio}>
-            <h3>{modoEdicion ? 'Editar producto' : 'Agregar nuevo producto'}</h3>
-            <div>
-                <label>Categoría:</label>
+        <form style={formStyle} onSubmit={manejarEnvio} className="d-flex flex-column gap-3">
+            <h3 className="mb-0">{modoEdicion ? 'Editar producto' : 'Agregar nuevo producto'}</h3>
+
+            <div className="d-flex flex-column gap-2">
+                <label className="fw-semibold">Categoría</label>
                 <input
                     type="text"
                     name="categoria"
+                    className="form-control rounded-3"
                     placeholder="Ej: Tecnología"
                     value={datosForm.categoria}
                     onChange={manejarCambio}
                 />
             </div>
-            <div>
-                <label>Nombre del Producto:</label>
+
+            <div className="d-flex flex-column gap-2">
+                <label className="fw-semibold">Nombre del Producto</label>
                 <input
                     type="text"
                     name="nombre"
+                    className="form-control rounded-3"
                     placeholder="Ej: Teclado Mecánico"
                     value={datosForm.nombre}
                     onChange={manejarCambio}
                 />
             </div>
-            <div>
-                <label>Descripción:</label>
+
+            <div className="d-flex flex-column gap-2">
+                <label className="fw-semibold">Descripción</label>
                 <input
                     type="text"
                     name="descripcion"
+                    className="form-control rounded-3"
                     placeholder="Ej: Teclado Mecánico"
                     value={datosForm.descripcion}
                     onChange={manejarCambio}
                 />
             </div>
-            <div>
-                <label>Precio:</label>
+
+            <div className="d-flex flex-column gap-2">
+                <label className="fw-semibold">Precio</label>
                 <input
                     type="number"
                     name="precio"
+                    className="form-control rounded-3"
                     placeholder="Ej: 95"
                     value={datosForm.precio}
                     onChange={manejarCambio}
                 />
             </div>
-            <div>
-                <label>Cantidad:</label>
+
+            <div className="d-flex flex-column gap-2">
+                <label className="fw-semibold">Cantidad</label>
                 <input
                     type="number"
                     name="cantidad"
+                    className="form-control rounded-3"
                     placeholder="Ej: 95"
                     value={datosForm.cantidad}
                     onChange={manejarCambio}
                 />
             </div>
-            <div>
-                <label>Stock:</label>
+
+            <div className="d-flex flex-column gap-2">
+                <label className="fw-semibold">Stock</label>
                 <input
                     type="number"
                     name="stock"
+                    className="form-control rounded-3"
                     placeholder="Ej: 5"
                     value={datosForm.stock}
                     onChange={manejarCambio}
                 />
             </div>
-            <div>
-                <label>Imagen:</label>
+
+            <div className="d-flex flex-column gap-2">
+                <label className="fw-semibold">Imagen</label>
                 <input
                     type="file"
                     name="imagen"
                     accept="image/*"
+                    className="form-control rounded-3"
                     onChange={manejarCambioImagen}
                 />
                 {modoEdicion && datosForm.imagen && (
-                    <div>
-                        <p>Imagen actual:</p>
-                        <img src={datosForm.imagen} alt="Vista previa" style={{ width: '100px' }} />
+                    <div className="mt-2">
+                        <p className="mb-2 fw-semibold">Imagen actual</p>
+                        <img src={datosForm.imagen} alt="Vista previa" style={{ width: '100px', borderRadius: '12px' }} />
                     </div>
                 )}
             </div>
-            <button type="submit" disabled={loading}>
-                {loading ? 'Actualizando...' : modoEdicion ? 'Actualizar producto' : 'Agregar Producto'}
-            </button>
-            {productoAEditar && (
-                <button onClick={cancelarEdicion}>
-                    Cancelar Edición
+
+            <div className="d-flex gap-2 flex-wrap mt-2">
+                <button type="submit" className="btn btn-success rounded-3" disabled={loading}>
+                    {loading ? 'Actualizando...' : modoEdicion ? 'Actualizar producto' : 'Agregar Producto'}
                 </button>
-            )}
+                {productoAEditar && (
+                    <button type="button" className="btn btn-outline-secondary rounded-3" onClick={cancelarEdicion}>
+                        Cancelar Edición
+                    </button>
+                )}
+            </div>
         </form>
     );
 }

@@ -2,10 +2,10 @@ import { useState } from "react";
 import { Link } from 'react-router-dom';
 import { useCart } from '../../../hooks/useCart';
 import type { Producto } from "../../../types/Producto";
+import { Button, Card } from "react-bootstrap";
 
 export function ProductoItem({ producto } : { producto: Producto }) {
     const [cantidad, setCantidad] = useState(producto.cantidad || 0);
-    const [favorito, setFavorito] = useState(false);
     const { addToCart, removeProductoDelCarrito } = useCart();
     const [productoEnCarrito, setProductoEnCarrito] = useState<boolean | null>(producto.cantidad > 0 ? true : false);
 
@@ -31,32 +31,31 @@ export function ProductoItem({ producto } : { producto: Producto }) {
     };
 
     return (
-        <div className="card-producto">
-            <img src={producto.imagen} alt={producto.nombre} width={100} height={100} />
-            <h3>{producto.nombre}</h3>
-            <p>${producto.precio}</p>
-            <p>Stock disponible: {producto.stock}</p>
-            <Link to={`/producto/${producto.id}`}>Ver detalle</Link>
-            <p>
-                <button onClick={decrementar}>-</button>
+        <Card className="h-100">
+            <Card.Img variant="top" src={producto.imagen} />
+            <Card.Body className="d-flex flex-column">
+                <Card.Title>{producto.nombre}</Card.Title>
+                <Card.Text>${producto.precio}</Card.Text>
+                <Card.Text>Stock disponible: {producto.stock}</Card.Text>
+                <Link to={`/productos-nacionales/${producto.id}`}>
+                    <Button variant="primary" className="btn btn-primary mt-auto">
+                        Ver detalle
+                    </Button>
+                </Link>
+                <Button onClick={decrementar} className="btn btn-primary mt-auto">-</Button>
                 {cantidad}
-                <button onClick={incrementar}>+</button>
-            </p>
-            {productoEnCarrito && cantidad === 0 ? (
-                <button onClick={handleRemoveFromCart}>
-                    Quitar producto del carrito
-                </button>
-            ) :
-            (
-                <button onClick={handleAddToCart} disabled={cantidad === 0}>
-                    {productoEnCarrito ? `Actualizar ${cantidad} en el Carrito` : `Agregar ${cantidad} al Carrito`}
-                </button>
-            )}
-            
-            <span onClick={() => setFavorito(!favorito)}
-                style={{ fontSize: '24px', cursor: 'pointer', marginLeft: '10px' }}>
-                {favorito ? '⭐' : '☆'}
-            </span>
-        </div>
+                <Button onClick={incrementar} className="btn btn-primary mt-auto">+</Button>
+                {productoEnCarrito && cantidad === 0 ? (
+                    <Button onClick={handleRemoveFromCart} className="btn btn-danger mt-auto">
+                        Quitar producto del carrito
+                    </Button>
+                ) :
+                (
+                    <Button onClick={handleAddToCart} disabled={cantidad === 0} className="btn btn-primary mt-auto">
+                        {productoEnCarrito ? `Actualizar ${cantidad} en el Carrito` : `Agregar ${cantidad} al Carrito`}
+                    </Button>
+                )}
+            </Card.Body>
+        </Card>
     );
 }

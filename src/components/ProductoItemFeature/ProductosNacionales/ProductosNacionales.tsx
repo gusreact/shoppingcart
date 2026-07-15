@@ -1,9 +1,9 @@
 import { useState, useEffect, useCallback } from 'react';
 import { collection, getDocs, query, limit, startAfter, type QueryDocumentSnapshot, type DocumentData } from 'firebase/firestore';
 import { db } from '../../../firebase/config';
-import { Link } from 'react-router-dom';
-import { Container, Row, Col, Card, Button, Spinner, Alert } from 'react-bootstrap';
+import { Container, Row, Col, Button, Spinner, Alert } from 'react-bootstrap';
 import type { Producto } from '../../../types/Producto';
+import { ProductoItem } from '../ProductoItem/ProductoItem';
 
 const ProductosNacionales = () => {
   // Estados del componente
@@ -129,18 +129,7 @@ const ProductosNacionales = () => {
         ) : (
           productosFiltrados.map((prod, index) => (
             <Col key={obtenerKeyProducto(prod, index)} xs={12} md={6} lg={3} className="mb-4">
-              <Card className="h-100">
-                <Card.Img variant="top" src={prod.imagen} />
-                <Card.Body className="d-flex flex-column">
-                  <Card.Title>{prod.nombre}</Card.Title>
-                  <Card.Text>${prod.precio}</Card.Text>
-                  <Link to={`/productos-nacionales/${prod.id}`}>
-                    <Button variant="primary" className="btn btn-primary mt-auto">
-                      Ver detalle
-                    </Button>
-                  </Link>
-                </Card.Body>
-              </Card>
+              <ProductoItem producto={prod} />
             </Col>
           ))
         )}
