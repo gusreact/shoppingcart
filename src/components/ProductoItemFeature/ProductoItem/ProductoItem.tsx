@@ -5,10 +5,11 @@ import type { Producto } from "../../../types/Producto";
 import { Button, Card } from "react-bootstrap";
 
 export function ProductoItem({ producto } : { producto: Producto }) {
-    const [cantidad, setCantidad] = useState(producto.cantidad || 0);
     const { addToCart, removeProductoDelCarrito, isInCart, getQuantityById } = useCart();
-    const [productoEnCarrito, setProductoEnCarrito] = useState<boolean | null>(producto.cantidad > 0 ? true : false);
-    const cantidadEnCarrito = isInCart(producto.id) && getQuantityById(producto.id);
+    const cantidadProducto = isInCart(producto.id) ? getQuantityById(producto.id) : 0;
+    const [cantidad, setCantidad] = useState(cantidadProducto);
+    const [productoEnCarrito, setProductoEnCarrito] = useState<boolean | null>(isInCart(producto.id) ? true : false);
+
     const incrementar = () => {
         if (cantidad < producto.stock)
             setCantidad(cantidad + 1);
@@ -19,6 +20,10 @@ export function ProductoItem({ producto } : { producto: Producto }) {
     };
 
     const handleAddToCart = () => {
+        if(cantidad === 0){
+            handleRemoveFromCart();
+            return;
+        }
         addToCart(producto, cantidad);
         alert(`Agregaste ${cantidad} unidades de ${producto.nombre} al carrito.`);
         setProductoEnCarrito(true);
@@ -28,6 +33,7 @@ export function ProductoItem({ producto } : { producto: Producto }) {
         removeProductoDelCarrito(producto.id);
         alert(`Quitaste ${producto.nombre} del carrito.`);
         setProductoEnCarrito(false);
+        setCantidad(0);
     };
 
     return (
@@ -45,7 +51,7 @@ export function ProductoItem({ producto } : { producto: Producto }) {
                 <Button onClick={decrementar} className="btn btn-primary mt-auto">-</Button>
                 {cantidad}
                 <Button onClick={incrementar} className="btn btn-primary mt-auto">+</Button>
-                <Button onClick={handleAddToCart} disabled={(cantidadEnCarrito === 0 && cantidad === 0) || (cantidadEnCarrito !== 0 && cantidadEnCarrito === cantidad)} className="btn btn-primary mt-auto">
+                <Button onClick={handleAddToCart} disabled={(cantidadProducto === 0 && cantidad === 0) || (cantidadProducto !== 0 && cantidadProducto === cantidad)} className="btn btn-primary mt-auto">
                     {productoEnCarrito ? `Actualizar ${cantidad} en el Carrito` : `Agregar ${cantidad} al Carrito`}
                 </Button>
                 {productoEnCarrito && (
