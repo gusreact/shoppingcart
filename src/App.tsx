@@ -27,7 +27,7 @@ return (
         <Route path="/carrito" element={<Cart />} />
         <Route path="/productos-nacionales" element={<ProductosNacionales />} />
         <Route path="/productos-nacionales/:id" element={<ProductosNacionalesDetalle />} />
-        <Route path="/admin/cupones" element={<GestionCupones />} />
+        <Route path="/admin/cupones" element={<ProtectedRoute rolesPermitidos={['admin']}><GestionCupones /></ProtectedRoute>} />
         <Route path="/registro" element={<Registro />} />
         <Route path="/perfil" element={<ProtectedRoute rolesPermitidos={['admin', 'user']}><Perfil /></ProtectedRoute>} />
         <Route path="/login" element={<Login />} />

@@ -6,9 +6,9 @@ import { Button, Card } from "react-bootstrap";
 
 export function ProductoItem({ producto } : { producto: Producto }) {
     const [cantidad, setCantidad] = useState(producto.cantidad || 0);
-    const { addToCart, removeProductoDelCarrito } = useCart();
+    const { addToCart, removeProductoDelCarrito, isInCart, getQuantityById } = useCart();
     const [productoEnCarrito, setProductoEnCarrito] = useState<boolean | null>(producto.cantidad > 0 ? true : false);
-
+    const cantidadEnCarrito = isInCart(producto.id) && getQuantityById(producto.id);
     const incrementar = () => {
         if (cantidad < producto.stock)
             setCantidad(cantidad + 1);
@@ -45,17 +45,15 @@ export function ProductoItem({ producto } : { producto: Producto }) {
                 <Button onClick={decrementar} className="btn btn-primary mt-auto">-</Button>
                 {cantidad}
                 <Button onClick={incrementar} className="btn btn-primary mt-auto">+</Button>
-                {productoEnCarrito && cantidad === 0 ? (
-                    <Button onClick={handleRemoveFromCart} className="btn btn-danger mt-auto">
-                        Quitar producto del carrito
-                    </Button>
-                ) :
-                (
-                    <Button onClick={handleAddToCart} disabled={cantidad === 0} className="btn btn-primary mt-auto">
-                        {productoEnCarrito ? `Actualizar ${cantidad} en el Carrito` : `Agregar ${cantidad} al Carrito`}
-                    </Button>
+                <Button onClick={handleAddToCart} disabled={(cantidadEnCarrito === 0 && cantidad === 0) || (cantidadEnCarrito !== 0 && cantidadEnCarrito === cantidad)} className="btn btn-primary mt-auto">
+                    {productoEnCarrito ? `Actualizar ${cantidad} en el Carrito` : `Agregar ${cantidad} al Carrito`}
+                </Button>
+                {productoEnCarrito && (
+                <Button onClick={handleRemoveFromCart} className="btn btn-danger mt-auto">
+                    Eliminar
+                </Button>
                 )}
-            </Card.Body>
+        </Card.Body>
         </Card>
     );
 }

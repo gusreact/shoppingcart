@@ -14,10 +14,9 @@ function Header() {
                     <ul>
                         <li><Link to="/">Inicio</Link></li>
                         <li><Link to="/productos-nacionales">Productos Nacionales</Link></li>
-                        <li><Link to="/admin/cupones">Gestión de Cupones</Link></li>
                         {user ? (
                             <>{/* Mostrar Gestion SOLO si el usuario es admin */}
-                                {user.rol === 'admin' && (<li><Link to="/productos">Gestion</Link></li>)}
+                                {user.rol === 'admin' && (<><li><Link to="/admin/cupones">Gestión de Cupones</Link></li><li><Link to="/productos">Gestion</Link></li></>)}
                                 <li><Link to="/perfil">Perfil</Link></li>
                                     <span>¡Hola, {user.email}!</span>
                                     <button onClick={logout}>Cerrar Sesión</button>
